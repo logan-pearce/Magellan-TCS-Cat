@@ -25,10 +25,6 @@ Supply a list of Simbad-resolvable target names and produce a catalog for LCO TC
 Documentation for TCS catalog format: https://www.lco.cl/technical-documentation/observing-catalogs-format/.  This script takes in Simbad names of targets and retrieves from Simbad the parameters for fields 2--7. The observer needs to supply telescope setup parameters for fields 8--16.  The default settings given in the fields will be populated automatically if not changed. Alternately you can supply a csv file of target names and fields 8--16 parameters and generate a catalog from that. Or you can supply a csv file of all fields to generate a catalog.
 
 
-
-Dependencies:
-astropy, astroquery, numpy, pandas
-
 Written by Logan Pearce, 2022, 2024
 https://github.com/logan-pearce; http://www.loganpearcescience.com
 
