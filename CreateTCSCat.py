@@ -4,8 +4,6 @@ import pandas as pd
 import numpy as np
 import astropy.units as u
 from astroquery.simbad import Simbad
-import astropy.units as u
-from streamlit import session_state
 from io import StringIO
 
 st.set_page_config(
