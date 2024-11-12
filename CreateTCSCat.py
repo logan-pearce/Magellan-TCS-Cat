@@ -17,7 +17,7 @@ st.set_page_config(
 
 c1,c2,c3 = st.columns(3)
 with c2:
-    st.write('## targets_into_TCScat.py')
+    st.write('## Magellan TCS Catalog Builder')
 '''
 
 Supply a list of Simbad-resolvable target names and produce a catalog for LCO TCS.  
