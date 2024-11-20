@@ -299,7 +299,7 @@ with cols[1]:
 def toggle_image():
     st.session_state.show_text = not st.session_state.show_text
 
-st.button('Show/Hide Manual Entry Example', on_click=toggle_text)
+st.button('Show/Hide Manual Entry Example', on_click=toggle_image)
 
 if st.session_state.show_text:
     st.image("Manual-Example.png")
