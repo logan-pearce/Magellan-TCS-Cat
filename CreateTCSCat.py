@@ -293,7 +293,11 @@ with cols[1]:
         st.write(Names)
 #Names = st.text_input(r"$\textsf{\Large Names}$", key='names')
 
-''' Enter telescope set up parameters below.  If each target requires the same setup parameters, you only need to enter the value once. To apply different parameters for each target, enter the list into each field. The list length must be the same length as the list of names.'''
+''' Enter telescope set up parameters below.  If each target requires the same setup parameters, you only need to enter the value once. To apply different parameters for each target, enter the list into each field. The list length must be the same length as the list of names.  In the example, four targets are provided, with one needing a different rotator mode and angle than the others, so a list of four modes and angles are entered in the relevant fields, with only one entry in each remaining field as those parameters are the same for all four targets.'''
+st.link_button("Manual Entry Example", "Manual-Example.png")
+
+''' '''
+''' '''
 
 row_input = st.columns((1,1))
 with row_input[0]:
