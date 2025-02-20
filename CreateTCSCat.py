@@ -124,8 +124,6 @@ else:
 
 st.download_button(label=r"$\textsf{\Large Save Cat}$", data = pdcat_out, file_name=filename+'.cat', key='save1')
 
-import astroquery
-st.markdown(astroquery.__version__)
 
 def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_probe2, eq2, epoch, filename):
     Names = Names.split(',')
@@ -144,11 +142,8 @@ def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_pro
 
     from astropy.coordinates import Angle
     for i in range(len(pdcat)):
-        r = customSimbad.query_object(pdcat['Name'][i])
-        print(r)
         try:
             r = customSimbad.query_object(pdcat['Name'][i])
-            st.markdown(r)
             pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['RA'][0],r['DEC'][0]
             pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['PMRA'][0],r['PMDEC'][0]
             pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
