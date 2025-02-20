@@ -143,27 +143,32 @@ def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_pro
 
     from astropy.coordinates import Angle
     for i in range(len(pdcat)):
-        r = customSimbad.query_object(pdcat['Name'][i])
-        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['RA'][0],r['DEC'][0]
-        pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['PMRA'][0],r['PMDEC'][0]
-        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
-            pdcat.loc[i,'DEC'].replace(' ',':')
-        
-        
-        # Create an astropy angle object:
-        a = Angle(pdcat.loc[i,'pmra'],u.mas)
-        # Convert to hms:
-        a2 = a.hms
-        # add up the seconds (a2[0] and a2[1] are most likely 0 but just in case):
-        a3 = a2[0]*u.hr.to(u.s) + a2[1]*u.min.to(u.s) + a2[2]
-        # put into table:
-        pdcat.loc[i,'pmra s/yr'] = a3
-        
-        # Dec is easier:
-        a = pdcat.loc[i,'pmdec']*u.mas.to(u.arcsec)
-        # put into table:
-        pdcat.loc[i,'pmdec arcsec/yr'] = a
-        
+        try:
+            r = customSimbad.query_object(pdcat['Name'][i])
+            pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['RA'][0],r['DEC'][0]
+            pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['PMRA'][0],r['PMDEC'][0]
+            pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
+                pdcat.loc[i,'DEC'].replace(' ',':')
+            
+            
+            # Create an astropy angle object:
+            a = Angle(pdcat.loc[i,'pmra'],u.mas)
+            # Convert to hms:
+            a2 = a.hms
+            # add up the seconds (a2[0] and a2[1] are most likely 0 but just in case):
+            a3 = a2[0]*u.hr.to(u.s) + a2[1]*u.min.to(u.s) + a2[2]
+            # put into table:
+            pdcat.loc[i,'pmra s/yr'] = a3
+            
+            # Dec is easier:
+            a = pdcat.loc[i,'pmdec']*u.mas.to(u.arcsec)
+            # put into table:
+            pdcat.loc[i,'pmdec arcsec/yr'] = a
+        except:
+            st.markdown('Could not find ' + pdcat['Name'][i])
+            pass
+
+
     for i in range(len(pdcat)):
         pdcat.loc[i,'Name'] = pdcat.loc[i,'Name'].replace(' ','')
     pdcat['num'] = np.arange(1,len(pdcat)+1,1)
@@ -293,7 +298,7 @@ with cols[1]:
         st.write(Names)
 #Names = st.text_input(r"$\textsf{\Large Names}$", key='names')
 
-''' Enter telescope set up parameters below.  If each target requires the same setup parameters, you only need to enter the value once. To apply different parameters for each target, enter the list into each field. The list length must be the same length as the list of names.  In the example, four targets are provided, with one needing a different rotator mode and angle than the others, so a list of four modes and angles are entered in the relevant fields, with only one entry in each remaining field as those parameters are the same for all four targets.'''
+''' Enter telescope set up parameters below.  If each target requires the same setup parameters, you only need to enter the value once. To apply different parameters for each target, enter the list into each field. The list length must be the same length as the list of names.  In the  below, four targets are provided, with one needing a different rotator mode and angle than the others, so a list of four modes and angles are entered in the relevant fields, with only one entry in each remaining field as those parameters are the same for all four targets.'''
 #st.link_button("Manual Entry Example", "Manual-Example.png")
 
 if 'show_text' not in st.session_state:
