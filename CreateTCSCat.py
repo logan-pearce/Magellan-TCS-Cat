@@ -143,6 +143,8 @@ def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_pro
 
     from astropy.coordinates import Angle
     for i in range(len(pdcat)):
+        r = customSimbad.query_object(pdcat['Name'][i])
+        print(r)
         try:
             r = customSimbad.query_object(pdcat['Name'][i])
             print(r)
