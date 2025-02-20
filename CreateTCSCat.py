@@ -124,7 +124,8 @@ else:
 
 st.download_button(label=r"$\textsf{\Large Save Cat}$", data = pdcat_out, file_name=filename+'.cat', key='save1')
 
-
+import astroquery
+st.markdown(astroquery.__version__)
 
 def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_probe2, eq2, epoch, filename):
     Names = Names.split(',')
