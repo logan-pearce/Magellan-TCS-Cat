@@ -151,7 +151,6 @@ def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_pro
             pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
                 pdcat.loc[i,'DEC'].replace(' ',':')
             
-            
             # Create an astropy angle object:
             a = Angle(pdcat.loc[i,'pmra'],u.mas)
             # Convert to hms:
