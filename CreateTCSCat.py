@@ -171,7 +171,7 @@ def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC
         pdcat.loc[i,'Name'] = pdcat.loc[i,'Name'].replace(' ','')
     pdcat['num'] = np.arange(1,len(pdcat)+1,1)
 
-    pdcat_out = pdcat[['num']]
+    pdcat_out = pdcat[['# num']]
     pdcat_out['Name'] = pdcat['Name']
     pdcat_out['RA'] = pdcat['RA']
     pdcat_out['Dec'] = pdcat['DEC']
