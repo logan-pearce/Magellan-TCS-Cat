@@ -176,14 +176,14 @@ def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_pro
     pdcat_out['RA'] = pdcat['RA']
     pdcat_out['Dec'] = pdcat['DEC']
 
-    # eq = eq.split(',')
-    # if len(eq) == 1:
-    #     pdcat_out.loc[:,'Equinox'] = eq[0]
-    # else:
-    #     try:
-    #         pdcat_out['Equinox'] = np.array([str(e).replace(' ','') for e in eq])
-    #     except:
-    #         st.write('Enter RA/Dec equinox as one date or a list of dates as long as the number of names.')
+    eq = eq.split(',')
+    if len(eq) == 1:
+        pdcat_out.loc[:,'Equinox'] = eq[0]
+    else:
+        try:
+            pdcat_out['Equinox'] = np.array([str(e).replace(' ','') for e in eq])
+        except:
+            st.write('Enter RA/Dec equinox as one date or a list of dates as long as the number of names.')
 
     pdcat_out['pmra'] = pdcat['pmra s/yr']
     pdcat_out['pmdec'] = pdcat['pmdec arcsec/yr'] 
@@ -311,6 +311,7 @@ if st.session_state.show_text:
 
 ''' '''
 ''' '''
+eq = st.text_input(r"$\textsf{\Large RA/DEC Equinox (default: 2000)}$", '2000',key='eq')
 
 row_input = st.columns((1,1))
 with row_input[0]:
