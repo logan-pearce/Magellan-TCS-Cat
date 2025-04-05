@@ -125,7 +125,7 @@ else:
 st.download_button(label=r"$\textsf{\Large Save Cat}$", data = pdcat_out, file_name=filename+'.cat', key='save1')
 
 
-def doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_probe2, eq2, epoch, filename):
+def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_probe2, eq2, epoch, filename):
     Names = Names.split(',')
     Names = [Names[i].replace("'","") for i in range(len(Names))]
     Names = [Names[i].replace("*","") for i in range(len(Names))]
@@ -338,7 +338,7 @@ Enter filename to save catalog as. Cat will save as "filename.cat" to your local
 filename = st.text_input(r"$\textsf{\Large Filename}$", key='filename')
 
 if st.button(r"$\textsf{\Large Generate TCS Catalog}$", key='generate2'):
-    pdcat_out = doit(Names, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_probe2, eq2, epoch, filename)
+    pdcat_out = doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC_probe2, eq2, epoch, filename)
     st.write(':sparkles: Catalog Created :sparkles:')
 else:
     pdcat_out = ''
