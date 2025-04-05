@@ -64,7 +64,7 @@ def doitwithcsv(pdcat_in):
     Names = [Names[i].replace("\n","") for i in range(len(Names))]
     if 'RA' in pdcat_in.columns:
         nums = np.arange(1,len(pdcat_in)+1,1)
-        pdcat_out = pd.DataFrame({'num':nums, 'Name':Names})
+        pdcat_out = pd.DataFrame({'# num':nums, 'Name':Names})
         for col in pdcat_in.columns[1:]:
             pdcat_out[col] = pdcat_in[col]
         pdcat_out = pdcat_out.to_csv(index=False, sep='\t')
@@ -97,9 +97,9 @@ def doitwithcsv(pdcat_in):
             pdcat.loc[i,'pmdec arcsec/yr'] = a
         for i in range(len(pdcat)):
             pdcat.loc[i,'Name'] = pdcat.loc[i,'Name'].replace(' ','')
-        pdcat['num'] = np.arange(1,len(pdcat)+1,1)
+        pdcat['# num'] = np.arange(1,len(pdcat)+1,1)
 
-        pdcat_out = pdcat[['num']]
+        pdcat_out = pdcat[['# num']]
         pdcat_out['Name'] = pdcat['Name']
         pdcat_out['RA'] = pdcat['RA']
         pdcat_out['Dec'] = pdcat['DEC']
@@ -169,7 +169,7 @@ def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC
 
     for i in range(len(pdcat)):
         pdcat.loc[i,'Name'] = pdcat.loc[i,'Name'].replace(' ','')
-    pdcat['num'] = np.arange(1,len(pdcat)+1,1)
+    pdcat['# num'] = np.arange(1,len(pdcat)+1,1)
 
     pdcat_out = pdcat[['# num']]
     pdcat_out['Name'] = pdcat['Name']
