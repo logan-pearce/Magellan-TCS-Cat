@@ -142,29 +142,29 @@ def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC
 
     from astropy.coordinates import Angle
     for i in range(len(pdcat)):
-        try:
-            r = customSimbad.query_object(pdcat['Name'][i])
-            pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['RA'][0],r['DEC'][0]
-            pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['PMRA'][0],r['PMDEC'][0]
-            pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
-                pdcat.loc[i,'DEC'].replace(' ',':')
-            
-            # Create an astropy angle object:
-            a = Angle(pdcat.loc[i,'pmra']/np.cos(np.radians(pdcat.loc[i,'DEC'])),u.mas)
-            # Convert to hms:
-            a2 = a.hms
-            # add up the seconds (a2[0] and a2[1] are most likely 0 but just in case):
-            a3 = a2[0]*u.hr.to(u.s) + a2[1]*u.min.to(u.s) + a2[2]
-            # put into table:
-            pdcat.loc[i,'pmra s/yr'] = a3
-            
-            # Dec is easier:
-            a = pdcat.loc[i,'pmdec']*u.mas.to(u.arcsec)
-            # put into table:
-            pdcat.loc[i,'pmdec arcsec/yr'] = a
-        except:
-            st.markdown('Could not find ' + pdcat['Name'][i])
-            pass
+        #try:
+        r = customSimbad.query_object(pdcat['Name'][i])
+        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['RA'][0],r['DEC'][0]
+        pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['PMRA'][0],r['PMDEC'][0]
+        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
+            pdcat.loc[i,'DEC'].replace(' ',':')
+        
+        # Create an astropy angle object:
+        a = Angle(pdcat.loc[i,'pmra']/np.cos(np.radians(pdcat.loc[i,'DEC'])),u.mas)
+        # Convert to hms:
+        a2 = a.hms
+        # add up the seconds (a2[0] and a2[1] are most likely 0 but just in case):
+        a3 = a2[0]*u.hr.to(u.s) + a2[1]*u.min.to(u.s) + a2[2]
+        # put into table:
+        pdcat.loc[i,'pmra s/yr'] = a3
+        
+        # Dec is easier:
+        a = pdcat.loc[i,'pmdec']*u.mas.to(u.arcsec)
+        # put into table:
+        pdcat.loc[i,'pmdec arcsec/yr'] = a
+        # except:
+        #     st.markdown('Could not find ' + pdcat['Name'][i])
+        #     pass
 
 
     for i in range(len(pdcat)):
