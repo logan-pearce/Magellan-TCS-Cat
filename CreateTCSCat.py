@@ -169,24 +169,24 @@ def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC
 
     for i in range(len(pdcat)):
         pdcat.loc[i,'Name'] = pdcat.loc[i,'Name'].replace(' ','')
-    pdcat['# num'] = np.arange(1,len(pdcat)+1,1)
+    pdcat.loc[:,'# num'] = np.arange(1,len(pdcat)+1,1)
 
     pdcat_out = pdcat[['# num']]
-    pdcat_out['Name'] = pdcat['Name']
-    pdcat_out['RA'] = pdcat['RA']
-    pdcat_out['Dec'] = pdcat['DEC']
+    pdcat_out.loc[:,'Name'] = pdcat['Name']
+    pdcat_out.loc[:,'RA'] = pdcat['RA']
+    pdcat_out.loc[:,'Dec'] = pdcat['DEC']
 
     eq = eq.split(',')
     if len(eq) == 1:
-        pdcat_out.loc[:,'Equinox'] = eq[0]
+        pdcat_out.loc[:,'Equinox'] = [eq[0]]*len(pdcat_out)
     else:
         try:
             pdcat_out['Equinox'] = np.array([str(e).replace(' ','') for e in eq])
         except:
             st.write('Enter RA/Dec equinox as one date or a list of dates as long as the number of names.')
 
-    pdcat_out['pmra'] = pdcat['pmra s/yr']
-    pdcat_out['pmdec'] = pdcat['pmdec arcsec/yr'] 
+    pdcat_out.loc[:,'pmra'] = pdcat['pmra s/yr']
+    pdcat_out.loc[:,'pmdec'] = pdcat['pmdec arcsec/yr'] 
 
     rotang = rotang.split(',')
     if len(rotang) == 1:
