@@ -140,14 +140,13 @@ def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC
 
     pdcat['pmra s/yr'], pdcat['pmdec arcsec/yr'] = np.nan, np.nan
 
-    from astropy.coordinates import Angle
+    from astropy.coordinates import Angle, SkyCoord
     for i in range(len(pdcat)):
         #try:
         r = customSimbad.query_object(pdcat['Name'][i])
-        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['ra'][0],r['dec'][0]
+        rr = SkyCoord(r['ra'][0]*u.deg, r['dec'][0]*u.deg)
+        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = rr.ra.to_string(unit=u.hour, sep=':'), rr.dec.to_string(unit=u.deg, sep=':')
         pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['pmra'][0],r['pmdec'][0]
-        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
-            pdcat.loc[i,'DEC'].replace(' ',':')
         
         # Create an astropy angle object:
         a = Angle(pdcat.loc[i,'pmra']/np.cos(np.radians(pdcat.loc[i,'DEC'])),u.mas)
