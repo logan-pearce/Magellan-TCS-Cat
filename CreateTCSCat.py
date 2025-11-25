@@ -144,8 +144,8 @@ def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC
     for i in range(len(pdcat)):
         #try:
         r = customSimbad.query_object(pdcat['Name'][i])
-        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['RA'][0],r['DEC'][0]
-        pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['PMRA'][0],r['PMDEC'][0]
+        pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = r['ra'][0],r['dec'][0]
+        pdcat.loc[i,'pmra'], pdcat.loc[i,'pmdec'] = r['pmra'][0],r['pmdec'][0]
         pdcat.loc[i,'RA'], pdcat.loc[i,'DEC'] = pdcat.loc[i,'RA'].replace(' ',':'), \
             pdcat.loc[i,'DEC'].replace(' ',':')
         
