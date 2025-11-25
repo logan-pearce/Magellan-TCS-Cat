@@ -150,7 +150,7 @@ def doit(Names, eq, rotang, rot_mode, RA_probe1, DEC_probe1, eq1, RA_probe2, DEC
                 pdcat.loc[i,'DEC'].replace(' ',':')
             
             # Create an astropy angle object:
-            a = Angle(pdcat.loc[i,'pmra'],u.mas)
+            a = Angle(pdcat.loc[i,'pmra']/np.cos(np.radians(pdcat.loc[i,'DEC'])),u.mas)
             # Convert to hms:
             a2 = a.hms
             # add up the seconds (a2[0] and a2[1] are most likely 0 but just in case):
