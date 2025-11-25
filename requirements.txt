@@ -1,9 +1,6 @@
 setuptools
-streamlit==1.39.0
-SQLAlchemy==2.0.27
+streamlit==1.48.1
 pandas
-numpy==1.23.1
-matplotlib
-bokeh==2.4.3
+numpy==1.26.4
 astropy
-astroquery==0.4.7
+astroquery==0.4.10
